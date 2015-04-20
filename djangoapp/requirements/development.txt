@@ -1,0 +1,9 @@
+--requirement=project.txt
+
+lxml
+sqlparse
+
+django-debug-toolbar
+django-debug-toolbar-template-timings
+werkzeug
+flake8
