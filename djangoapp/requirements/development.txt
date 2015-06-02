@@ -1,8 +1,10 @@
 --requirement=project.txt
 
 lxml
+ipython
 sqlparse
 
+readline
 django-debug-toolbar
 django-debug-toolbar-template-timings
 werkzeug
