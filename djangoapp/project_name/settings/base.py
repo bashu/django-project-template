@@ -56,6 +56,7 @@ DJANGO_APPS = [
 
 EXTERNAL_APPS = [
     'django_extensions',
+    'crispy_forms',
 ]
 
 PROJECT_APPS = [
@@ -166,3 +167,9 @@ CSRF_COOKIE_DOMAIN = '.%s' % SITE_DOMAIN
 ## Sessions settings
 
 SESSION_COOKIE_DOMAIN = '.%s' % SITE_DOMAIN
+
+
+## Crispy settings
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
