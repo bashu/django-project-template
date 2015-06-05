@@ -8,3 +8,4 @@
 # information.
 
 django-extensions
+django-crispy-forms
