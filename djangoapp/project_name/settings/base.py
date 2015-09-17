@@ -15,8 +15,6 @@ import os
 
 from .. import __version__
 
-VERSION = __version__
-
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 
@@ -57,6 +55,7 @@ DJANGO_APPS = [
 EXTERNAL_APPS = [
     'django_extensions',
     'crispy_forms',
+    'djangobower',
 ]
 
 PROJECT_APPS = [
@@ -152,6 +151,12 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static', DJANGO_THEME),
 )
 
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'djangobower.finders.BowerFinder',
+)
+
 
 ## Email / notification settings
 
@@ -173,3 +178,8 @@ SESSION_COOKIE_DOMAIN = '.%s' % SITE_DOMAIN
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
+## Bower settings
+
+BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'static')
+BOWER_INSTALLED_APPS = [
+]
