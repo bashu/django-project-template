@@ -29,3 +29,5 @@ sudo port install advancecomp
 sudo port install jpegoptim
 sudo port install gifsicle
 sudo port install optipng
+
+sudo port install nodejs

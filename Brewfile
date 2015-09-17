@@ -33,5 +33,7 @@ brew install jpegoptim
 brew install gifsicle
 brew install optipng
 
+brew install node
+
 # remove outdated versions from the cellar
 brew cleanup
