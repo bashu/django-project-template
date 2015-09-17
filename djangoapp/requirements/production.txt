@@ -1,2 +1,5 @@
 --requirement=project.txt
 
+python-memcached
+psycopg2
+
