@@ -8,26 +8,19 @@ sudo port install git
 
 # install required and other useful binaries
 sudo port install postgresql93-server
-sudo port install geos proj
-sudo port install postgis2
+sudo port install geos proj postgis2 libgeoip
 sudo port install gdal +geos
-sudo port install libgeoip
 
 # PIL / Pillow dependencies
-sudo port install lcms2
-sudo port install jpeg
-sudo port install libpng
-sudo port install webp
+sudo port install lcms2 jpeg libpng webp
 
 # XML parsing tools
-sudo port install libxml2
-sudo port install libxslt
+sudo port install libxml2 libxslt
 
 # image optimization utils
 sudo port install pngcrush
 sudo port install advancecomp
 sudo port install jpegoptim
-sudo port install gifsicle
 sudo port install optipng
 
 sudo port install nodejs

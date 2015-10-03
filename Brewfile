@@ -6,31 +6,22 @@ brew update
 # upgrade any already-installed formulae
 brew upgrade
 
-# version Control
+# version control
 brew install git
 
 # install required and other useful binaries
-brew install postgresql
-brew install postgis
-brew install gdal
-brew install libgeoip
-brew install libmemcached
+brew install postgresql postgis gdal libgeoip
 
 # PIL / Pillow dependencies
-brew install little-cms2
-brew install libjpeg
-brew install libpng
-brew install webp
+brew install little-cms2 libjpeg libpng webp
 
 # XML parsing tools
-brew install libxml2
-brew install libxslt
+brew install libxml2 libxslt
 
 # image optimization utils
 brew install pngcrush
 brew install advancecomp
 brew install jpegoptim
-brew install gifsicle
 brew install optipng
 
 brew install node
