@@ -1,5 +1,5 @@
 --requirement=project.txt
 
-python-memcached
+django-redis
 psycopg2
 
