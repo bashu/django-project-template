@@ -13,6 +13,13 @@ MIDDLEWARE_CLASSES += [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': '{{ project_name }}',
+    }
+}
+
 ROOT_URLCONF = '{{ project_name }}.urls.development'
 
 WSGI_APPLICATION = '{{ project_name }}.wsgi.development.application'
