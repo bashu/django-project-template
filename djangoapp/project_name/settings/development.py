@@ -42,5 +42,13 @@ DEBUG_TOOLBAR_PANELS = [
     # Third-party panels...
     'template_timings_panel.panels.TemplateTimings.TemplateTimings',
 ]
+
+
+## Cross Site Request Forgery protection
+
 CSRF_COOKIE_DOMAIN = None
+
+
+## Session settings
+
 SESSION_COOKIE_DOMAIN = None
