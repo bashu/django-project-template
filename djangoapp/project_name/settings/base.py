@@ -113,10 +113,22 @@ DATABASES = {
 
 CACHES = {
     'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': os.environ.get('REDIS_URL', '127.0.0.1:6379'),
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    },
+    # Long cache timeout for staticfiles, since this is used heavily by the optimizing storage.
+    'staticfiles': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'unique-snowflake',
+        'LOCATION': 'staticfiles',
+        'TIMEOUT': 60 * 60 * 24 * 365,
     },
 }
+
+DJANGO_REDIS_IGNORE_EXCEPTIONS = True
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/{{ docs_version }}/topics/i18n/
