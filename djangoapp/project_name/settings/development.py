@@ -17,6 +17,12 @@ ROOT_URLCONF = '{{ project_name }}.urls.development'
 
 WSGI_APPLICATION = '{{ project_name }}.wsgi.development.application'
 
+
+## Email / notification settings
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
 # Debug Toolbar settings
 
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
