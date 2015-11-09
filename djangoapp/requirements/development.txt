@@ -1,6 +1,5 @@
 --requirement=project.txt
 
-lxml
 ipython
 sqlparse
 

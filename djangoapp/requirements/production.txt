@@ -1,5 +1,2 @@
 --requirement=project.txt
 
-django-redis
-psycopg2
-

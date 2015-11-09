@@ -1,2 +1,5 @@
 django
 template-utils==0.4p2
+django-redis
+psycopg2
+six
