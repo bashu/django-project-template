@@ -4,12 +4,12 @@ from django.conf import settings
 from django.conf.urls import include, patterns, url
 from django.contrib import admin
 
-urlpatterns = [
-    # Examples:
-    # url(r'^$', '{{ project_name }}.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
+from django.contrib import admin
+admin.autodiscover()
 
+urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^robots\.txt$', include('robots.urls')),
 ]
 
 if settings.DEBUG and 'debug_toolbar' in settings.INSTALLED_APPS:
@@ -30,4 +30,6 @@ if settings.SERVE_MEDIA:
             'document_root': settings.MEDIA_ROOT,
         }),
     )
-    
+
+urlpatterns += [
+]

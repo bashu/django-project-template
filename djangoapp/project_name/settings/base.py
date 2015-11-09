@@ -56,6 +56,7 @@ EXTERNAL_APPS = [
     'django_extensions',
     'crispy_forms',
     'djangobower',
+    'robots',
 ]
 
 PROJECT_APPS = [
@@ -178,8 +179,15 @@ SESSION_COOKIE_DOMAIN = '.%s' % SITE_DOMAIN
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
+
 ## Bower settings
 
 BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'static')
 BOWER_INSTALLED_APPS = [
 ]
+
+
+## Robots settings
+
+ROBOTS_USE_SITEMAP = False
+ROBOTS_CACHE_TIMEOUT = 60 * 60 * 24
