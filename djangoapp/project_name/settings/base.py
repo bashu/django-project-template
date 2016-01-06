@@ -56,6 +56,7 @@ EXTERNAL_APPS = [
     'django_extensions',
     'crispy_forms',
     'djangobower',
+    'favicon',
     'robots',
 ]
 

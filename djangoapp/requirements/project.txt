@@ -10,4 +10,7 @@
 django-extensions
 django-crispy-forms
 django-bower
+
 django-robots
+django-favicon-plus
+
