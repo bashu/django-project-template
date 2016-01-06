@@ -177,6 +177,15 @@ STATICFILES_FINDERS = (
 CONTACT_EMAIL = 'support@%s' % SITE_DOMAIN
 DEFAULT_FROM_EMAIL = SERVER_EMAIL = CONTACT_EMAIL
 
+EMAIL_SUBJECT_PREFIX = "[%s] " % SITE_NAME
+
+EMAIL_HOST = os.environ.get('EMAIL_HOST', 'localhost')
+EMAIL_PORT = os.environ.get('EMAIL_PORT', 25)
+if os.environ.get('EMAIL_HOST_USER', None):
+    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
+if os.environ.get('EMAIL_HOST_PASSWORD', None):
+    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+
 
 ## Cross Site Request Forgery protection
 
