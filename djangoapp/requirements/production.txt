@@ -1,3 +1,4 @@
 --requirement=project.txt
 
+django-toolbelt
 whitenoise
