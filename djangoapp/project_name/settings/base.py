@@ -46,12 +46,13 @@ SITE_ID = 1
 # Application definition
 
 DJANGO_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
-    'django.contrib.contenttypes',
+    'django.contrib.admin',
     'django.contrib.sessions',
-    'django.contrib.messages',
+    'django.contrib.contenttypes',
     'django.contrib.staticfiles',
+    'django.contrib.messages',
+    'django.contrib.sites',
 ]
 
 EXTERNAL_APPS = [
