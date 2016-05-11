@@ -1,0 +1,3 @@
+{
+    "directory": "djangoapp/{{ projec_name }}/static/bower_components"
+}
