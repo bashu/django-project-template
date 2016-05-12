@@ -9,6 +9,7 @@
 
 django-extensions
 django-crispy-forms
+django-braces
 django-bower
 
 django-robots
