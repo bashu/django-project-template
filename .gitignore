@@ -44,4 +44,6 @@ coverage.xml
 .ropeproject
 
 # Django stuff:
+staticfiles
+media
 *.log
