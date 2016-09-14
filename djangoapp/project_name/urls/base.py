@@ -2,7 +2,6 @@ import re
 
 from django.conf import settings
 from django.conf.urls import include, patterns, url
-from django.contrib import admin
 
 from django.contrib import admin
 admin.autodiscover()
