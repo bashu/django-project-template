@@ -69,7 +69,12 @@ PROJECT_APPS = [
 INSTALLED_APPS = DJANGO_APPS + EXTERNAL_APPS + PROJECT_APPS
 
 MIDDLEWARE_CLASSES = [
-    'django.middleware.gzip.GZipMiddleware',
+    'django.middleware.common.BrokenLinkEmailsMiddleware',
+
+    # 'django.middleware.cache.UpdateCacheMiddleware',
+
+    'django.middleware.http.ConditionalGetMiddleware',
+    
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -78,6 +83,8 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    
+    # 'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 TEMPLATES = [
@@ -119,6 +126,8 @@ CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
         'LOCATION': os.environ.get('REDIS_URL', '127.0.0.1:6379'),
+        'TIMEOUT': 60 * 60 * 24,
+        'VERSION': __version__,
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
@@ -132,6 +141,7 @@ CACHES = {
 }
 
 DJANGO_REDIS_IGNORE_EXCEPTIONS = True
+CACHE_MIDDLEWARE_SECONDS = 60 * 60
 
 
 # Internationalization
@@ -165,7 +175,8 @@ MEDIA_URL = '/media/'
 # Absolute path to the directory static files should be collected to.
 STATIC_ROOT = os.path.join(os.path.join(BASE_DIR, '..'), '..', 'staticfiles')
 
-STATIC_URL = '/static/'
+STATIC_HOST = os.environ.get('DJANGO_STATIC_HOST', '')
+STATIC_URL = STATIC_HOST + '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
