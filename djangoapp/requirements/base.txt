@@ -1,4 +1,5 @@
 django
 template-utils==0.4p2
 django-redis
+bcrypt
 six
