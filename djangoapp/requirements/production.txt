@@ -1,1 +1,4 @@
 --requirement=project.txt
+
+django-anymail
+django-admin-honeypot
