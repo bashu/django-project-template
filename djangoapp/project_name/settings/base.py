@@ -57,8 +57,12 @@ DJANGO_APPS = [
 ]
 
 EXTERNAL_APPS = [
+    'cachalot',
+    
     'django_extensions',
     'djangobower',
+    'pipeline,
+    
     'robots',
 ]
 
@@ -74,6 +78,7 @@ MIDDLEWARE_CLASSES = [
     # 'django.middleware.cache.UpdateCacheMiddleware',
 
     'django.middleware.http.ConditionalGetMiddleware',
+    'pipeline.middleware.MinifyHTMLMiddleware',
     
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -95,6 +100,12 @@ TEMPLATES = [
         ],
         'APP_DIRS': True,
         'OPTIONS': {
+            'loaders': [
+                ('django.template.loaders.cached.Loader', [
+                    'django.template.loaders.filesystem.Loader',
+                    'django.template.loaders.app_directories.Loader',
+                ]),
+            ],
             'context_processors': [
                 'django.template.context_processors.tz',
                 'django.template.context_processors.i18n',
@@ -187,12 +198,35 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'djangobower.finders.BowerFinder',
+    'pipeline.finders.PipelineFinder',
 )
+
+STATICFILES_STORAGE = 'localsite.custom_storages.GzipManifestPipelineStorage'
 
 MIGRATION_MODULES = {
 }
 
 USE_ETAGS = True
+
+
+## AWS / S3 settings
+
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', "")
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', "")
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', "")
+AWS_AUTO_CREATE_BUCKET = True
+
+AWS_REDUCED_REDUNDANCY = False
+AWS_QUERYSTRING_AUTH = False
+AWS_IS_GZIPPED = False
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_S3_SECURE_URLS = True
+
+AWS_HEADERS = {
+    'Access-Control-Allow-Origin': '*',
+    'Cache-Control': 'public, max-age=%d' % (7 * 86400),
+}
 
 
 ## Email / notification settings
@@ -229,6 +263,37 @@ BOWER_INSTALLED_APPS = [
     'bootstrap',
     'jquery',
 ]
+
+
+## Pipeline settings
+
+PIPELINE = {
+    'PIPELINE_ENABLED': True,
+    'CSS_COMPRESSOR': 'localsite.compressors.rcssmin.RCSSMinCompressor',
+    'JS_COMPRESSOR': 'localsite.compressors.rjsmin.RJSMinCompressor',
+    'STYLESHEETS': {
+        'common': {
+            'source_filenames': (
+                'bootstrap/dist/css/bootstrap.css',
+                'css/custom.css',
+            ),
+            'output_filename': 'CACHE/common.min.css',
+            'variant': 'datauri',
+        },
+    },
+    'JAVASCRIPT': {
+        'common': {
+            'source_filenames': (
+                'jquery/dist/jquery.js',
+                'bootstrap/dist/js/bootstrap.js',
+                'js/custom.js',
+            ),
+            'output_filename': 'CACHE/common.min.js',
+            'extra_context': {
+            },
+        },
+    }
+}
 
 
 ## Robots settings
