@@ -24,15 +24,31 @@ INSTALLED_APPS += [
     'admin_honeypot',
 ]
 
+MIDDLEWARE_CLASSES += [
+    'localsite.middleware.RemoteAddrMiddleware',
+]
+
 import dj_database_url
 DATABASES = {
     'default': dj_database_url.config(default='postgres://localhost'),
 }
 DATABASES['default']['CONN_MAX_AGE'] = 600
 
+DEFAULT_FILE_STORAGE = "localsite.custom_storages.DefaultStorage"
+
 ROOT_URLCONF = '{{ project_name }}.urls.production'
 
 WSGI_APPLICATION = '{{ project_name }}.wsgi.production.application'
+
+MEDIA_ROOT = 'media'
+MEDIA_URL = "https://{bucket_name}.s3.amazonaws.com/".format(
+    bucket_name = AWS_STORAGE_BUCKET_NAME,
+)
+
+IGNORABLE_404_URLS = [
+    re.compile(r'^/apple-touch-icon.*\.png$'),
+    re.compile(r'^/favicon\.ico$'),
+]
 
 
 ## Email / notification settings
