@@ -1,5 +1,7 @@
 from .base import *
 
+SECRET_KEY = 'sekrit'
+
 DEBUG_PROPAGATE_EXCEPTIONS = True
 
 INTERNAL_IPS = ['127.0.0.1', '0.0.0.0']
@@ -9,14 +11,16 @@ INSTALLED_APPS += [
     'debug_toolbar',
 ]
 
-MIDDLEWARE_CLASSES += [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
-]
+if 'debug_toolbar' in INSTALLED_APPS:
+    MIDDLEWARE_CLASSES += [
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    ]
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': '{{ project_name }}',
+        'CONN_MAX_AGE': 600,
     }
 }
 
@@ -49,6 +53,10 @@ DEBUG_TOOLBAR_PANELS = [
     # Third-party panels...
     'template_timings_panel.panels.TemplateTimings.TemplateTimings',
 ]
+if 'cachalot' in INSTALLED_APPS:
+    DEBUG_TOOLBAR_PANELS += [
+        'cachalot.panels.CachalotPanel',
+    ]
 
 
 ## Cross Site Request Forgery protection
@@ -59,3 +67,23 @@ CSRF_COOKIE_DOMAIN = None
 ## Session settings
 
 SESSION_COOKIE_DOMAIN = None
+
+
+## Logging settings
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+        },
+    },
+    "loggers": {
+        "django": {
+            "level": 'DEBUG',
+            "handlers": ["console"],
+        }
+    }
+}
