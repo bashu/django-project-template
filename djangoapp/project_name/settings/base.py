@@ -28,7 +28,6 @@ SECRET_KEY = os.environ.get("SECRET_KEY", get_random_string(
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-TEMPLATE_DEBUG = True
 
 SERVE_MEDIA = True
 
@@ -41,6 +40,8 @@ INTERNAL_IPS = ['127.0.0.1']
 SITE_NAME = 'example.com'
 SITE_DOMAIN = 'example.com'
 SITE_ID = 1
+
+ADMIN_URL = r'^admin/'
 
 
 # Application definition
@@ -57,9 +58,7 @@ DJANGO_APPS = [
 
 EXTERNAL_APPS = [
     'django_extensions',
-    'crispy_forms',
     'djangobower',
-    'favicon',
     'robots',
 ]
 
@@ -179,6 +178,11 @@ STATICFILES_FINDERS = (
     'djangobower.finders.BowerFinder',
 )
 
+MIGRATION_MODULES = {
+}
+
+USE_ETAGS = True
+
 
 ## Email / notification settings
 
@@ -202,19 +206,17 @@ CSRF_COOKIE_DOMAIN = '.%s' % SITE_DOMAIN
 
 ## Sessions settings
 
-SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
 SESSION_COOKIE_DOMAIN = '.%s' % SITE_DOMAIN
-
-
-## Crispy settings
-
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 90  # 90 days in seconds
 
 
 ## Bower settings
 
-BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'static')
+BOWER_COMPONENTS_ROOT = os.path.join(os.path.join(BASE_DIR, '..'), '..')
 BOWER_INSTALLED_APPS = [
+    'bootstrap',
+    'jquery',
 ]
 
 
