@@ -9,9 +9,17 @@
 
 django-appconf
 django-extensions
+django-cachalot
+
+rjsmin
+rcssmin
 django-bower
+django-pipeline
 
 django-robots
+
+django-storages-redux
+boto
 
 django-toolbelt
 whitenoise
