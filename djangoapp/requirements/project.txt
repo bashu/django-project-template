@@ -9,12 +9,9 @@
 
 django-appconf
 django-extensions
-django-crispy-forms
-django-braces
 django-bower
 
 django-robots
-django-favicon-plus
 
 django-toolbelt
 whitenoise
