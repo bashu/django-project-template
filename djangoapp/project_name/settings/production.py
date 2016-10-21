@@ -34,8 +34,6 @@ ROOT_URLCONF = '{{ project_name }}.urls.production'
 
 WSGI_APPLICATION = '{{ project_name }}.wsgi.production.application'
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-
 
 ## Email / notification settings
 
