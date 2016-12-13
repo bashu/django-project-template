@@ -12,7 +12,7 @@ INSTALLED_APPS += [
 ]
 
 if 'debug_toolbar' in INSTALLED_APPS:
-    MIDDLEWARE_CLASSES += [
+    MIDDLEWARE += [
         'debug_toolbar.middleware.DebugToolbarMiddleware',
     ]
 
@@ -36,7 +36,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Debug Toolbar settings
 
-DEBUG_TOOLBAR_PATCH_SETTINGS = False
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': lambda request: True if DEBUG else False,
+}
 DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar.panels.versions.VersionsPanel',
     'debug_toolbar.panels.timer.TimerPanel',
@@ -76,13 +78,13 @@ LOGGING = {
     "disable_existing_loggers": False,
     "handlers": {
         "console": {
-            "level": "DEBUG",
+            "level": "INFO",
             "class": "logging.StreamHandler",
         },
     },
     "loggers": {
         "django": {
-            "level": 'DEBUG',
+            "level": "INFO",
             "handlers": ["console"],
         }
     }
