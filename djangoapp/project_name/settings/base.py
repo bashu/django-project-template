@@ -61,7 +61,7 @@ EXTERNAL_APPS = [
     
     'django_extensions',
     'djangobower',
-    'pipeline,
+    'pipeline',
     
     'robots',
 ]
