@@ -2,6 +2,7 @@ include:
   - postgres
 
 {% set version = salt['pillar.get']('python:version', '3') %}
+{% set project_name = salt['pillar.get']('project:name', 'example') %}
 
 /home/vagrant/.virtualenv:
   virtualenv.managed:
