@@ -72,7 +72,7 @@ PROJECT_APPS = [
 
 INSTALLED_APPS = DJANGO_APPS + EXTERNAL_APPS + PROJECT_APPS
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.middleware.common.BrokenLinkEmailsMiddleware',
 
     # 'django.middleware.cache.UpdateCacheMiddleware',
