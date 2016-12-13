@@ -28,3 +28,12 @@ migrate:
     - cwd: "/home/vagrant/{{ project_name }}"
     - require:
       - virtualenv: /home/vagrant/.virtualenv
+
+createsuperuser:
+  cmd.wait:
+    - user: vagrant
+    - name: "source ~/.virtualenv/bin/activate && echo \"from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin@example.com', 'password')\" | python ./djangoapp/manage.py shell"
+    - cwd: "/home/vagrant/{{ project_name }}"
+    - watch:
+      - cmd: migrate
+ 
