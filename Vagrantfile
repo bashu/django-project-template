@@ -64,6 +64,9 @@ Vagrant.configure("2") do |config|
                   "python" => {
                     "version" => 3,
                   },
+                  "project" => {
+                    "name" => "{{ project_name }}",
+                  },
                 })
     salt.run_highstate = true
     salt.verbose = true
