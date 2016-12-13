@@ -1,6 +1,6 @@
 from .base import *
 
-import os
+import os, re
 
 DEBUG = False
 SERVE_MEDIA = DEBUG
