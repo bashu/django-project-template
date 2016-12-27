@@ -1,1 +1,1 @@
-web: make serve PORT=$PORT ENV=production
+web: make serve PORT=$PORT ENV=$ENV
