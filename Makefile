@@ -1,6 +1,6 @@
 # You can set these variables from the command line.
 PORT =
-ENV = 
+ENV ?= production 
 
 MANAGE := python $(shell pwd)/djangoapp/manage.py
 
