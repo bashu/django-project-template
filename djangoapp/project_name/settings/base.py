@@ -23,7 +23,7 @@ BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 from django.utils.crypto import get_random_string
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", get_random_string(
+SECRET_KEY = os.environ.get("SECRET_KEY", get_random_string(
     50, "abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)"))
 
 # SECURITY WARNING: don't run with debug turned on in production!
