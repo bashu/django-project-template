@@ -18,7 +18,7 @@ django-pipeline
 
 django-robots
 
-django-storages-redux
+django-storages>1.5
 boto
 
 django-toolbelt

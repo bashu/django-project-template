@@ -1,4 +1,4 @@
-django
+django<2.0
 template-utils==0.4p2
 django-redis
 bcrypt

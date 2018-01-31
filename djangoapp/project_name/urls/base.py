@@ -9,11 +9,6 @@ urlpatterns = [
     url(settings.ADMIN_URL, include(admin.site.urls)),
 ]
 
-if 'robots' in settings.INSTALLED_APPS:
-    urlpatterns += [
-        url(r'^robots\.txt', include('robots.urls')),
-]
-
 if settings.DEBUG and 'debug_toolbar' in settings.INSTALLED_APPS:
     import debug_toolbar
     urlpatterns += [
@@ -34,5 +29,12 @@ if settings.SERVE_MEDIA:
         }),
     ]
 
-urlpatterns += [
+if 'robots' in settings.INSTALLED_APPS:
+    urlpatterns += [
+        url(r'^robots\.txt', include('robots.urls')),
 ]
+
+if 'localsite' in settings.INSTALLED_APPS:
+    urlpatterns += [
+        url(r'^', include('localsite.urls')),    
+    ]

@@ -40,7 +40,6 @@ ROOT_URLCONF = '{{ project_name }}.urls.production'
 
 WSGI_APPLICATION = '{{ project_name }}.wsgi.production.application'
 
-MEDIA_ROOT = 'media'
 MEDIA_URL = "https://{bucket_name}.s3.amazonaws.com/".format(
     bucket_name = AWS_STORAGE_BUCKET_NAME,
 )
@@ -57,18 +56,6 @@ ANYMAIL = {
     "MAILGUN_API_KEY": os.environ.get('MAILGUN_API_KEY', "")
 }
 EMAIL_BACKEND = "anymail.backends.mailgun.MailgunBackend"  # or sendgrid.SendGridBackend, or...
-
-
-## Cross Site Request Forgery protection
-
-CSRF_COOKIE_SECURE = False
-CSRF_COOKIE_HTTPONLY = True
-
-
-## Session settings
-
-SESSION_COOKIE_SECURE = False
-SESSION_COOKIE_HTTPONLY = True
 
 
 ## Logging settings

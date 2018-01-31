@@ -12,7 +12,7 @@ INSTALLED_APPS += [
 ]
 
 if 'debug_toolbar' in INSTALLED_APPS:
-    MIDDLEWARE += [
+    MIDDLEWARE_CLASSES += [
         'debug_toolbar.middleware.DebugToolbarMiddleware',
     ]
 

@@ -72,7 +72,7 @@ PROJECT_APPS = [
 
 INSTALLED_APPS = DJANGO_APPS + EXTERNAL_APPS + PROJECT_APPS
 
-MIDDLEWARE = [
+MIDDLEWARE_CLASSES = [
     'django.middleware.common.BrokenLinkEmailsMiddleware',
 
     # 'django.middleware.cache.UpdateCacheMiddleware',
@@ -175,15 +175,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/{{ docs_version }}/howto/static-files/
 
+MEDIAFILES_LOCATION = 'media'
+
 # Absolute filesystem path to the directory that will hold user-uploaded files.
-MEDIA_ROOT = os.path.join(os.path.join(BASE_DIR, '..'), '..', 'media')
+MEDIA_ROOT = os.path.join(os.path.join(BASE_DIR, '..'), '..', MEDIAFILES_LOCATION)
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 MEDIA_URL = '/media/'
 
+STATICFILES_LOCATION = 'staticfiles'
+
 # Absolute path to the directory static files should be collected to.
-STATIC_ROOT = os.path.join(os.path.join(BASE_DIR, '..'), '..', 'staticfiles')
+STATIC_ROOT = os.path.join(os.path.join(BASE_DIR, '..'), '..', STATICFILES_LOCATION)
 
 STATIC_HOST = os.environ.get('DJANGO_STATIC_HOST', '')
 STATIC_URL = STATIC_HOST + '/static/'

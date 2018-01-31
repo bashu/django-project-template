@@ -44,6 +44,7 @@ coverage.xml
 .ropeproject
 
 # Django stuff:
+Vagrantfile.local
 bower_components
 staticfiles
 media
