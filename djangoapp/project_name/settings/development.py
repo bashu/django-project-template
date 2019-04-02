@@ -6,8 +6,11 @@ DEBUG_PROPAGATE_EXCEPTIONS = True
 
 INTERNAL_IPS = ['127.0.0.1', '0.0.0.0']
 
+
+# Application definition
+
 INSTALLED_APPS += [
-    'template_timings_panel',
+#    'template_timings_panel',
     'debug_toolbar',
 ]
 

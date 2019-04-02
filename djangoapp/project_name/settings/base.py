@@ -10,11 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/{{ docs_version }}/ref/settings/
 """
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
 from .. import __version__
 
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 
@@ -23,7 +23,7 @@ BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 from django.utils.crypto import get_random_string
-SECRET_KEY = os.environ.get("SECRET_KEY", get_random_string(
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", get_random_string(
     50, "abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)"))
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -41,19 +41,18 @@ SITE_NAME = 'example.com'
 SITE_DOMAIN = 'example.com'
 SITE_ID = 1
 
-ADMIN_URL = r'^admin/'
+ADMIN_URL = os.environ.get('DJANGO_ADMIN_URL', 'admin/')
 
 
 # Application definition
 
 DJANGO_APPS = [
-    'django.contrib.auth',
     'django.contrib.admin',
-    'django.contrib.sessions',
+    'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.staticfiles',
+    'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.sites',
+    'django.contrib.staticfiles',
 ]
 
 EXTERNAL_APPS = [
@@ -73,23 +72,17 @@ PROJECT_APPS = [
 INSTALLED_APPS = DJANGO_APPS + EXTERNAL_APPS + PROJECT_APPS
 
 MIDDLEWARE_CLASSES = [
-    'django.middleware.common.BrokenLinkEmailsMiddleware',
-
-    # 'django.middleware.cache.UpdateCacheMiddleware',
-
+    'django.middleware.security.SecurityMiddleware',
     'django.middleware.http.ConditionalGetMiddleware',
+
     'pipeline.middleware.MinifyHTMLMiddleware',
     
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-    
-    # 'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 TEMPLATES = [
@@ -106,11 +99,7 @@ TEMPLATES = [
                 ]),
             ],
             'context_processors': [
-                'django.template.context_processors.tz',
-                'django.template.context_processors.i18n',
                 'django.template.context_processors.debug',
-                'django.template.context_processors.media',
-                'django.template.context_processors.static',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -151,7 +140,25 @@ CACHES = {
 }
 
 DJANGO_REDIS_IGNORE_EXCEPTIONS = True
-CACHE_MIDDLEWARE_SECONDS = 60 * 60
+
+
+# Password validation
+# https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
 
 
 # Internationalization
@@ -189,8 +196,7 @@ STATICFILES_LOCATION = 'staticfiles'
 # Absolute path to the directory static files should be collected to.
 STATIC_ROOT = os.path.join(os.path.join(BASE_DIR, '..'), '..', STATICFILES_LOCATION)
 
-STATIC_HOST = os.environ.get('DJANGO_STATIC_HOST', '')
-STATIC_URL = STATIC_HOST + '/static/'
+STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -226,9 +232,9 @@ AWS_IS_GZIPPED = False
 AWS_S3_FILE_OVERWRITE = False
 AWS_S3_SECURE_URLS = True
 
-AWS_HEADERS = {
+AWS_S3_OBJECT_PARAMETERS = {
     'Access-Control-Allow-Origin': '*',
-    'Cache-Control': 'public, max-age=%d' % (7 * 86400),
+    'CacheControl': 'public, max-age=%d' % (7 * 86400),
 }
 
 

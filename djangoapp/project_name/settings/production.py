@@ -1,6 +1,6 @@
 from .base import *
 
-import os, re
+import os
 
 DEBUG = False
 SERVE_MEDIA = DEBUG
@@ -11,17 +11,19 @@ MANAGERS = ADMINS
 
 ALLOWED_HOSTS = ['.example.com', 'localhost']
 
-ADMIN_URL = os.environ.get('DJANGO_ADMIN_URL', r'^admin/')
-
 # This ensures that Django will be able to detect a secure connection
 # properly on Heroku.
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True
 
+
+# Application definition
+
 INSTALLED_APPS += [
     'anymail',
     'admin_honeypot',
+#	'raven.contrib.django.raven_compat',
 ]
 
 MIDDLEWARE_CLASSES += [
@@ -53,9 +55,25 @@ IGNORABLE_404_URLS = [
 ## Email / notification settings
 
 ANYMAIL = {
-    "MAILGUN_API_KEY": os.environ.get('MAILGUN_API_KEY', "")
+    'AMAZON_SES_CLIENT_PARAMS': {
+        'aws_access_key_id': AWS_ACCESS_KEY_ID,
+        'aws_secret_access_key': AWS_SECRET_ACCESS_KEY,
+        'region_name': 'us-east-1',
+    },
 }
 EMAIL_BACKEND = "anymail.backends.mailgun.MailgunBackend"  # or sendgrid.SendGridBackend, or...
+
+
+## Raven / Sentry settings
+
+if 'raven.contrib.django.raven_compat' in INSTALLED_APPS:
+	if os.environ.get('SENTRY_DSN', None):
+	    RAVEN_CONFIG = {
+    	    'dsn': os.environ.get('SENTRY_DSN'),
+        	# If you are using git, you can also automatically configure the
+	        # release based on the git info.
+	        'release': __version__,
+	    }
 
 
 ## Logging settings
